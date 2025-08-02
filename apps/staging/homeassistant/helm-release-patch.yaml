@@ -6,12 +6,12 @@ metadata:
   namespace: homeassistant
 spec:
   values:
-		privileged: true
-			allowPrivilegeEscalation: true
-			capabilities:
-				add:
-					- SYS_RAWIO
-					- SYS_ADMIN
+    privileged: true
+    allowPrivilegeEscalation: true
+    capabilities:
+      add:
+        - SYS_RAWIO
+        - SYS_ADMIN
     nodeSelector:
       kubernetes.io/hostname: raspberrypi
     additionalVolumes:
@@ -22,37 +22,26 @@ spec:
     additionalMounts:
       - mountPath: /dev/ttyUSB0
         name: usb
-		templateConfig: |-
-			# Loads default set of integrations. Do not remove.
-			default_config:
+    templateConfig: |-
+      # Load frontend themes from the themes folder
+      frontend:
+        themes: !include_dir_merge_named themes
 
-			{{- if or .Values.ingress.enabled .Values.ingress.external }}
-			http:
-				use_x_forwarded_for: true
-				trusted_proxies:
-					{{- range .Values.configuration.trusted_proxies }}
-					- {{ . }}
-					{{- end }}
-			{{- end}}
-			# Load frontend themes from the themes folder
-			frontend:
-				themes: !include_dir_merge_named themes
-
-			automation: !include automations.yaml
-			script: !include scripts.yaml
-			scene: !include scenes.yaml
-			logger:
-				default: info
-				logs:
-					homeassistant.core: debug
-					homeassistant.components.zha: debug
-					bellows.zigbee.application: debug
-					bellows.ezsp: debug
-					zigpy: debug
-					zigpy_deconz.zigbee.application: debug
-					zigpy_deconz.api: debug
-					zigpy_xbee.zigbee.application: debug
-					zigpy_xbee.api: debug
-					zigpy_zigate: debug
-					zigpy_znp: debug
-					zhaquirks: debug
+      automation: !include automations.yaml
+      script: !include scripts.yaml
+      scene: !include scenes.yaml
+      logger:
+        default: info
+        logs:
+          homeassistant.core: debug
+          homeassistant.components.zha: debug
+          bellows.zigbee.application: debug
+          bellows.ezsp: debug
+          zigpy: debug
+          zigpy_deconz.zigbee.application: debug
+          zigpy_deconz.api: debug
+          zigpy_xbee.zigbee.application: debug
+          zigpy_xbee.api: debug
+          zigpy_zigate: debug
+          zigpy_znp: debug
+          zhaquirks: debug
