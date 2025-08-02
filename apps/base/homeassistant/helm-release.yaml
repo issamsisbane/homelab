@@ -1,3 +1,4 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -14,12 +15,12 @@ spec:
         name: homeassistant
         namespace: flux-system
   values:
-		image:
-			tag: stable
-		env:
-			- name: TZ
-				value: Europe/Paris
-		persistence:
-			enabled: true
-			accessMode: ReadWriteOnce
-			size: 5Gi
+    image:
+      tag: stable
+    env:
+      - name: TZ
+        value: Europe/Paris
+    persistence:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 5Gi
