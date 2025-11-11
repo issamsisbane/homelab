@@ -103,27 +103,27 @@ spec:
           #    prometheus-release: prom1
 
       additionalConfigFromEnvs:
-        - name: FORGEJO_DATABASE_PASSWD
+        - name: FORGEJO__DATABASE__PASSWD
           valueFrom:
             secretKeyRef:
               name: forgejo-cnpg-cluster-app
               key: password
-        - name: FORGEJO_DATABASE_NAME
+        - name: FORGEJO__DATABASE__NAME
           valueFrom:
             secretKeyRef:
               name: forgejo-cnpg-cluster-app
               key: dbname
-        - name: FORGEJO_DATABASE_USER
+        - name: FORGEJO__DATABASE__USER
           valueFrom:
             secretKeyRef:
               name: forgejo-cnpg-cluster-app
               key: user
-        - name: FORGEJO_DATABASE_HOST
+        - name: FORGEJO__DATABASE__HOST
           valueFrom:
             secretKeyRef:
               name: forgejo-cnpg-cluster-app
               key: host
-        - name: FORGEJO_DATABASE_DB_TYPE
+        - name: FORGEJO__DATABASE__DB_TYPE
           value: postgres
 
       config:
