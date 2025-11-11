@@ -24,7 +24,7 @@ spec:
     deploymentMode: SimpleScalable
     gateway:
       enabled: true
-    global:
+#    global:
       # dnsService: "dns-default"
       # dnsNamespace: "openshift-dns"
     loki:
