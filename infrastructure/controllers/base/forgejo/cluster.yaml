@@ -1,0 +1,12 @@
+kind: Cluster
+apiversion: v1
+metadata:
+  name: forgejo-cnpg-cluster
+  namespace: forgejo
+spec:
+  bootstrap:
+    initdb:
+      database: forgejo
+      owner: forgejo
+  instances: 2
+
