@@ -17,19 +17,10 @@ spec:
     namespaceOverride: observability
     backend:
       replicas: 1
-    chunksCache:
-      resources:
-        requests:
-          cpu: 100m
     deploymentMode: SimpleScalable
     gateway:
       enabled: true
-#    global:
-      # dnsService: "dns-default"
-      # dnsNamespace: "openshift-dns"
     loki:
-      storage:
-        type: s3
       auth_enabled: false
       ingester:
         chunk_encoding: snappy
@@ -59,7 +50,28 @@ spec:
     sidecar:
       rules:
         logLevel: WARNING
-    test:
-      enabled: false
     write:
       replicas: 2
+
+    # Zero out replica counts of other deployment modes
+		singleBinary:
+			replicas: 0
+
+		ingester:
+			replicas: 0
+		querier:
+			replicas: 0
+		queryFrontend:
+			replicas: 0
+		queryScheduler:
+			replicas: 0
+		distributor:
+			replicas: 0
+		compactor:
+			replicas: 0
+		indexGateway:
+			replicas: 0
+		bloomCompactor:
+			replicas: 0
+		bloomGateway:
+			replicas: 0 
