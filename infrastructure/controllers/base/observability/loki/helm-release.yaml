@@ -14,51 +14,51 @@ spec:
         name: loki
         namespace: flux-system
   values:
-		backend:
-			replicas: 1
-		chunksCache:
-			resources:
-				requests:
-					cpu: 100m
-		deploymentMode: SimpleScalable
-		gateway:
-			enabled: true
-		global:
-			# dnsService: "dns-default"
-			# dnsNamespace: "openshift-dns"
-		loki:
-			storage:
-				type: s3
-			auth_enabled: false
-			ingester:
-				chunk_encoding: snappy
-			limits_config:
-				allow_structured_metadata: true
-				retention_period: 672h
-				volume_enabled: true
-			pattern_ingester:
-				enabled: true
-			querier:
-				max_concurrent: 2
-			schemaConfig:
-				configs:
-					- from: '2025-07-01'
-						index:
-							period: 24h
-							prefix: loki_index_
-						object_store: s3
-						schema: v13
-						store: tsdb
-		lokiCanary:
-			enabled: false
-		minio:
-			enabled: true
-		read:
-			replicas: 1
-		sidecar:
-			rules:
-				logLevel: WARNING
-		test:
-			enabled: false
-		write:
-			replicas: 2
+    backend:
+      replicas: 1
+    chunksCache:
+      resources:
+        requests:
+          cpu: 100m
+    deploymentMode: SimpleScalable
+    gateway:
+      enabled: true
+    global:
+      # dnsService: "dns-default"
+      # dnsNamespace: "openshift-dns"
+    loki:
+      storage:
+        type: s3
+      auth_enabled: false
+      ingester:
+        chunk_encoding: snappy
+      limits_config:
+        allow_structured_metadata: true
+        retention_period: 672h
+        volume_enabled: true
+      pattern_ingester:
+        enabled: true
+      querier:
+        max_concurrent: 2
+      schemaConfig:
+        configs:
+          - from: '2025-07-01'
+            index:
+              period: 24h
+              prefix: loki_index_
+            object_store: s3
+            schema: v13
+            store: tsdb
+    lokiCanary:
+      enabled: false
+    minio:
+      enabled: true
+    read:
+      replicas: 1
+    sidecar:
+      rules:
+        logLevel: WARNING
+    test:
+      enabled: false
+    write:
+      replicas: 2
