@@ -13,102 +13,102 @@ spec:
         kind: OCIRepository
         name: forgejo
         namespace: flux-system
-      values:
-        # Default values for gitea.
+  values:
+    # Default values for gitea.
 
-        ## @param namespaceOverride String to fully override common.names.namespace
-        ##
-        namespaceOverride: 'forgejo'
+    ## @param namespaceOverride String to fully override common.names.namespace
+    ##
+    namespaceOverride: 'forgejo'
 
-        ## @param replicaCount number of replicas for the deployment
-        replicaCount: 1
+    ## @param replicaCount number of replicas for the deployment
+    replicaCount: 1
 
-        ## @section strategy
-        ## @param strategy.type strategy type
-        ## @param strategy.rollingUpdate.maxSurge maxSurge
-        ## @param strategy.rollingUpdate.maxUnavailable maxUnavailable
-        strategy:
-          type: 'RollingUpdate'
-          rollingUpdate:
-            maxSurge: '100%'
-            maxUnavailable: 0
+    ## @section strategy
+    ## @param strategy.type strategy type
+    ## @param strategy.rollingUpdate.maxSurge maxSurge
+    ## @param strategy.rollingUpdate.maxUnavailable maxUnavailable
+    strategy:
+      type: 'RollingUpdate'
+      rollingUpdate:
+        maxSurge: '100%'
+        maxUnavailable: 0
 
-        image:
-          registry: code.forgejo.org
-          repository: forgejo/forgejo
-          # Overrides the image tag whose default is the chart appVersion.
-          tag: ''
-          digest: ''
-          pullPolicy: IfNotPresent
-          rootless: true
-          fullOverride: ''
+    image:
+      registry: code.forgejo.org
+      repository: forgejo/forgejo
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ''
+      digest: ''
+      pullPolicy: IfNotPresent
+      rootless: true
+      fullOverride: ''
 
-        podSecurityContext:
-          fsGroup: 1000
+    podSecurityContext:
+      fsGroup: 1000
 
-        service:
-          http:
-            type: ClusterIP
-            port: 3000
-          ssh:
-            type: ClusterIP
-            port: 22
+    service:
+      http:
+        type: ClusterIP
+        port: 3000
+      ssh:
+        type: ClusterIP
+        port: 22
 
-        ## @section deployment
-        #
-        ## @param resources Kubernetes resources
-        resources: {}
-          # We usually recommend not to specify default resources and to leave this as a conscious
-          # choice for the user. This also increases chances charts run on environments with little
-          # resources, such as Minikube. If you do want to specify resources, uncomment the following
-          # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-          # limits:
-          #   cpu: 100m
-          #   memory: 128Mi
-          # requests:
-          #   cpu: 100m
-          #   memory: 128Mi
+    ## @section deployment
+    #
+    ## @param resources Kubernetes resources
+    resources: {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
 
-        persistence:
-          enabled: true
-          create: true
-          mount: true
-          claimName: gitea-shared-storage
-          size: 10Gi
-          accessModes:
-            - ReadWriteOnce
-          labels: {}
-          storageClass:
-          subPath:
-          volumeName: ''
-          annotations:
-            helm.sh/resource-policy: keep
+    persistence:
+      enabled: true
+      create: true
+      mount: true
+      claimName: gitea-shared-storage
+      size: 10Gi
+      accessModes:
+        - ReadWriteOnce
+      labels: {}
+      storageClass:
+      subPath:
+      volumeName: ''
+      annotations:
+        helm.sh/resource-policy: keep
 
-        initContainers:
-          resources:
-            limits: {}
-            requests:
-              cpu: 100m
-              memory: 128Mi
+    initContainers:
+      resources:
+        limits: {}
+        requests:
+          cpu: 100m
+          memory: 128Mi
 
-        ## @section Gitea
-        #
-        gitea:
-          metrics:
-            enabled: false
-            serviceMonitor:
-              enabled: false
-              namespace: ''
-              #  additionalLabels:
-              #    prometheus-release: prom1
+    ## @section Gitea
+    #
+    gitea:
+      metrics:
+        enabled: false
+        serviceMonitor:
+          enabled: false
+          namespace: ''
+          #  additionalLabels:
+          #    prometheus-release: prom1
 
-          additionalConfigSources:
-            - secret:
-                secretName: forgejo-cnpg-cluster-app
+      additionalConfigSources:
+        - secret:
+            secretName: forgejo-cnpg-cluster-app
 
-          config:
-            APP_NAME: 'Forgejo: Beyond coding. We forge.'
-            RUN_MODE: prod
-            server:
-              SSH_PORT: 22 # rootful image
-              SSH_LISTEN_PORT: 2222 # rootless image
+      config:
+        APP_NAME: 'Forgejo: Beyond coding. We forge.'
+        RUN_MODE: prod
+        server:
+          SSH_PORT: 22 # rootful image
+          SSH_LISTEN_PORT: 2222 # rootless image
