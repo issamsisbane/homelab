@@ -53,6 +53,9 @@ spec:
     write:
       replicas: 2
 
+    test:
+      enabled: false
+
     # Zero out replica counts of other deployment modes
     singleBinary:
       replicas: 0
