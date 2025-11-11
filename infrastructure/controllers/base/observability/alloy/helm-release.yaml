@@ -7,8 +7,8 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: alloy
-      version: "1.4.0"
+      chart: k8s-monitoring
+      version: "3.5.6"
       sourceRef:
         kind: HelmRepository
         name: alloy
@@ -53,18 +53,10 @@ spec:
     # The destination is automatically set from the destinations at the top of the config
     clusterMetrics:
       enabled: true
-      destinations:
-      - name: prometheus-local
-        type: prometheus
-        url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
 
     # The destination is automatically set from the destinations at the top of the config
     clusterEvents:
       enabled: true
-      destinations:
-      - name: prometheus-local
-        type: prometheus
-        url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
 
     # The destination is automatically set from the destinations at the top of the config
     podLogs:
@@ -83,7 +75,3 @@ spec:
         - deployment_environment_name
       structuredMetadata:
         pod: pod
-      destinations:
-      - name: loki-local
-        type: loki
-        url: http://loki-write.observability.svc.cluster.local:3100
