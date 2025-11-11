@@ -19,10 +19,10 @@ spec:
     destinations:
     - name: prometheus-local
       type: prometheus
-      url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
+      url: http://prometheus-operated.observability.svc.cluster.local:9090
     - name: loki-local
       type: loki
-      url: http://loki-write.observability.svc.cluster.local:3100
+      url: http://loki-gateway.observability.svc.cluster.local:3100
 
     # The logs collector. It is deployed as a DaemonSet and gathers Pod and Node logs
     alloy-logs:
