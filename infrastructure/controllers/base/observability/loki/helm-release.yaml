@@ -62,12 +62,10 @@ spec:
     chunksCache:
       resources:
         limits:
-          resources:
-            limits:
-              memory: 600Mi
-            requests:
-              cpu: 500m
-              memory: 200Mi
+          memory: 600Mi
+        requests:
+          cpu: 500m
+          memory: 200Mi
     ingester:
       replicas: 0
     querier:
