@@ -71,6 +71,8 @@ spec:
         externalLabels:
           cluster: homelab-alloy-cluster
 
+        externalWriteReceiver: true
+
     # --- Alertmanager ---
     alertmanager:
       enabled: true
