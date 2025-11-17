@@ -20,35 +20,7 @@ spec:
 
     # --- Désactiver les collecteurs doublons ---
     nodeExporter:
-      enabled: false
-
-    prometheus-node-exporter:
-      enabled: false
-
-    # Kubelet, cAdvisor, API server, etc. -> gérés par Alloy
-    kubeApiServer:
-      enabled: false
-
-    kubelet:
-      enabled: false
-
-    kubeControllerManager:
-      enabled: false
-
-    kubeScheduler:
-      enabled: false
-
-    kubeProxy:
-      enabled: false
-
-    coreDns:
-      enabled: false
-
-    kubeDns:
-      enabled: false
-
-    kubeEtcd:
-      enabled: false
+      enabled: true
 
     # --- Garder kube-state-metrics actif ---
     kubeStateMetrics:
@@ -62,6 +34,13 @@ spec:
     prometheus:
       enabled: true
       prometheusSpec:
+				resources:
+					requests:
+						cpu: 200m
+						memory: 200Mi
+					limits:
+						cpu: 600m
+						memory: 600Mi
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
@@ -70,8 +49,6 @@ spec:
         # Labels pour identifier le cluster
         externalLabels:
           cluster: homelab-alloy-cluster
-
-        externalWriteReceiver: true
 
     # --- Alertmanager ---
     alertmanager:
@@ -96,3 +73,15 @@ spec:
           enabled: true
         datasources:
           enabled: true
+      additionalDataSources:
+        - name: loki
+          access: proxy
+          type: loki
+			    url: http://loki-gateway.observability.svc.cluster.local:80/loki/api/v1/push
+			resources:
+				requests:
+					cpu: 80m
+					memory: 150Mi
+				limits:
+					cpu: 200m
+					memory: 400Mi

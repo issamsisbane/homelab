@@ -15,13 +15,21 @@ spec:
         namespace: flux-system
   values:
     namespaceOverride: observability
-    backend:
-      replicas: 1
+
     deploymentMode: SimpleScalable
-    gateway:
-      enabled: true
+
+		commonConfig:
+			replication_factor: 1
+
     loki:
       auth_enabled: false
+		  resources:
+				requests:
+					cpu: 150m
+					memory: 250Mi
+				limits:
+					cpu: 600m
+					memory: 600Mi
       ingester:
         chunk_encoding: snappy
       limits_config:
@@ -41,17 +49,28 @@ spec:
             object_store: s3
             schema: v13
             store: tsdb
+
     lokiCanary:
       enabled: false
+
     minio:
       enabled: true
+
+    gateway:
+      enabled: true
+
+    backend:
+      replicas: 1
+
     read:
       replicas: 1
+
+    write:
+      replicas: 1
+
     sidecar:
       rules:
         logLevel: WARNING
-    write:
-      replicas: 2
 
     test:
       enabled: false
@@ -59,13 +78,13 @@ spec:
     # Zero out replica counts of other deployment modes
     singleBinary:
       replicas: 0
+
     chunksCache:
-      resources:
-        limits:
-          memory: 600Mi
-        requests:
-          cpu: 500m
-          memory: 200Mi
+      enabled: false
+
+    resultsCache:
+      enabled: false
+
     ingester:
       replicas: 0
     querier:
