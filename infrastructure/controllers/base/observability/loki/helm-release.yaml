@@ -18,10 +18,10 @@ spec:
 
     deploymentMode: SimpleScalable
 
-    commonConfig:
-      replication_factor: 1
 
     loki:
+      commonConfig:
+        replication_factor: 1
       auth_enabled: false
       resources:
         requests:
