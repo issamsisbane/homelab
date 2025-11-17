@@ -77,7 +77,7 @@ spec:
         - name: loki
           access: proxy
           type: loki
-          url: http://loki-gateway.observability.svc.cluster.local:80/loki/api/v1/push
+          url: http://loki-gateway.observability.svc.cluster.local
       resources:
         requests:
           cpu: 80m
