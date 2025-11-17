@@ -34,13 +34,13 @@ spec:
     prometheus:
       enabled: true
       prometheusSpec:
-				resources:
-					requests:
-						cpu: 200m
-						memory: 200Mi
-					limits:
-						cpu: 600m
-						memory: 600Mi
+        resources:
+          requests:
+            cpu: 200m
+            memory: 200Mi
+          limits:
+            cpu: 600m
+            memory: 600Mi
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
@@ -77,11 +77,11 @@ spec:
         - name: loki
           access: proxy
           type: loki
-			    url: http://loki-gateway.observability.svc.cluster.local:80/loki/api/v1/push
-			resources:
-				requests:
-					cpu: 80m
-					memory: 150Mi
-				limits:
-					cpu: 200m
-					memory: 400Mi
+          url: http://loki-gateway.observability.svc.cluster.local:80/loki/api/v1/push
+      resources:
+        requests:
+          cpu: 80m
+          memory: 150Mi
+        limits:
+          cpu: 200m
+          memory: 400Mi

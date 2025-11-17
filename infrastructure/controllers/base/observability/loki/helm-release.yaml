@@ -18,18 +18,18 @@ spec:
 
     deploymentMode: SimpleScalable
 
-		commonConfig:
-			replication_factor: 1
+    commonConfig:
+      replication_factor: 1
 
     loki:
       auth_enabled: false
-		  resources:
-				requests:
-					cpu: 150m
-					memory: 250Mi
-				limits:
-					cpu: 600m
-					memory: 600Mi
+      resources:
+        requests:
+          cpu: 150m
+          memory: 250Mi
+        limits:
+          cpu: 600m
+          memory: 600Mi
       ingester:
         chunk_encoding: snappy
       limits_config:
