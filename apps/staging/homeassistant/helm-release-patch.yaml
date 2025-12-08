@@ -14,7 +14,7 @@ spec:
           - SYS_RAWIO
           - SYS_ADMIN
     nodeSelector:
-      kubernetes.io/hostname: raspberrypi
+      kubernetes.io/hostname: ubuntu
     additionalVolumes:
       - hostPath:
           path: /dev/ttyUSB0
